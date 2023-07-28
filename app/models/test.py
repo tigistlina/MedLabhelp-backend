@@ -1,12 +1,12 @@
 from django.db import models
-from models.panel import Panel
+from app.models.panel import Panel
 
 # Create your models here.
 class Test(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    panel_id = models.ForeignKey(Panel, null=True)
-    name = models.CharField(max_length=100)
+    # id = models.BigAutoField(primary_key=True)
+    panel_id = models.ForeignKey(Panel, on_delete=models.CASCADE, null=True)
+    name = models.TextField()
     description = models.TextField()
-    info_url = models.CharField(max_length=100)
-    normal_reference = models.CharField(max_length=100)
-    unit_of_measure = models.CharField(max_length=100)
+    info_url = models.TextField()
+    normal_reference = models.TextField()
+    unit_of_measure = models.TextField()
