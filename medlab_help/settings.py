@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'medlab_help.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'medlab_api_development',
+        'NAME': 'med_lab_api_development',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost'

@@ -1,14 +1,13 @@
 import csv
 import os
-from app.models.test import Test
+from app.models.test import Test, AlternateName
 from app.models.panel import Panel
 from app.models.organ import Organ
-from app.models.alternatename import AlternateName
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 
 def run():
-    ReadOrgan()
+    # ReadOrgan()
     ReadPanel()
     ReadTest()
     ReadAlternateName()
@@ -40,7 +39,9 @@ def ReadPanel():
 
     count = 1
 
+    
     for record in read_file:
+        print(record[1])
         if count == 1:
             pass
         else:
@@ -77,5 +78,11 @@ def ReadAlternateName():
         if count == 1:
             pass
         else:
-            AlternateName.objects.create(test_id=int(record[0]),name=record[1])
+            test_id = int(record[0])
+            try:
+                test_instance = Test.objects.get(id=test_id)
+                AlternateName.objects.create(test_id=test_instance,name=record[1])
+            except ObjectDoesNotExist:
+                return JsonResponse(f"Test with id {test_id} does not exist.",safe=False)
         count += 1
+
