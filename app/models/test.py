@@ -3,7 +3,6 @@ from app.models.panel import Panel
 
 # Create your models here.
 class Test(models.Model):
-    # id = models.BigAutoField(primary_key=True)
     panel_id = models.ForeignKey(Panel, on_delete=models.CASCADE, null=True)
     name = models.TextField()
     description = models.TextField()

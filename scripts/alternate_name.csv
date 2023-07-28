@@ -1,0 +1,105 @@
+test_id,name
+1,AST
+1,SGOT
+2,ALT
+2,SGPT
+3,ALP
+4,GGT
+4,GGTP
+4,GTP
+5,TB
+5,TSB
+5,Total serum bilirubin
+6,DB
+8,ALB
+9,TP
+10,Na
+11,K
+12,Cl
+13,BUN
+16,eGFR
+17,RBC
+18,Hb
+18,Hgb
+19,Hct
+20,MCV
+21,MCH
+22,MCHC
+23,WBC
+24,Neut
+25,Lymph
+26,Mono
+27,Eosino
+28,Baso
+31,LDL
+32,HDL
+33,Trig
+35,TIBC
+39,LPS
+42,Insulin C-Peptide
+42,Proinsulin C-Peptide
+43,FPG
+44,OGTT
+46,HbA1c
+46,A1C
+46,Glycoheoglobin
+46,Glycosylated hemoglobin
+47,25-hydroxyvitamin D
+47,vitamin D3
+51,Mg
+53,cTn
+53,cTnI
+53,cTnT
+53,Cardiac Troponin
+54,CK-MB
+56,ProBNP
+57,hs-CRP
+57,c - reactive protein
+58,PT
+59,INR
+60,PTT
+60,APTT
+69,Urine Ketone
+70,RBC Urine
+71,Urine Nitrites
+75,Urinary cast
+76,Urinary Crystals
+77,Anti-DNA
+78,ANA Direct
+79,C3
+80,C4
+81,CRP
+82,ESR
+83,RF
+84,FSH
+85,LH
+87,PGSN
+91,PRL
+92,PTH
+93,TSH
+94,FT3
+95,FT4
+96,T3
+97,T4
+98,HBsAg
+99,Anti-HAV
+100,Anti-HBC
+101,Anti-HBs
+102,IgM Anti-HBC
+103,Anti-HCV
+104,IgM Anti-HBC
+105,Anti-HCV
+106,HIV
+107,RPR
+108,HSV
+109,HPV
+110,PSA
+111,CA -125
+112,CEA
+113,CA19-9
+113,Pancreatic Cancer
+114,AFP
+115,CA 15-3
+115,Breast Cancer
+116,CA 27-29
+117,HCG Quantitative
