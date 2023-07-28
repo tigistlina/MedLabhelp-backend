@@ -8,10 +8,10 @@ from django.http import JsonResponse
 
 def run():
     # ReadOrgan()
-    ReadPanel()
-    ReadTest()
+    # ReadPanel()
+    # ReadTest()
     ReadAlternateName()
-    
+
 def ReadTest():
     file = open('scripts/test.csv')
     read_file=csv.reader(file)
@@ -29,7 +29,7 @@ def ReadTest():
                 panel_instance = Panel.objects.get(id=panel_id)
                 Test.objects.create(panel_id=panel_instance,name=record[1],description=record[2],info_url=record[3], normal_reference=record[4], unit_of_measure=record[5])
             except ObjectDoesNotExist:
-                return JsonResponse(f"Panel with id {panel_id} does not exist.",safe=False) 
+                return JsonResponse(f"Panel with id {panel_id} does not exist.",safe=False)
         count += 1
 
 def ReadPanel():
@@ -39,19 +39,24 @@ def ReadPanel():
 
     count = 1
 
-    
+
     for record in read_file:
         print(record[1])
+        if not record[1]:
+            continue
+
         if count == 1:
-            pass
+            count += 1
+            continue
         else:
             organ_id = int(record[1])
-            try:
+            if not organ_id:
+                organ_instance = None
+            else:
                 organ_instance = Organ.objects.get(id=organ_id)
-                Panel.objects.create(name=record[0],organ_id=organ_instance)
-            except ObjectDoesNotExist:
-                return JsonResponse(f"Organ with id {organ_id} does not exist.",safe=False)
-        count += 1
+
+            Panel.objects.create(name=record[0], organ_id=organ_instance)
+            count += 1
 
 def ReadOrgan():
     file = open('scripts/organ.csv')
@@ -85,4 +90,3 @@ def ReadAlternateName():
             except ObjectDoesNotExist:
                 return JsonResponse(f"Test with id {test_id} does not exist.",safe=False)
         count += 1
-
