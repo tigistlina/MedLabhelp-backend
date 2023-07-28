@@ -8,9 +8,9 @@ from django.http import JsonResponse
 
 def run():
     # ReadOrgan()
-    # ReadPanel()
+    ReadPanel()
     # ReadTest()
-    ReadAlternateName()
+    #ReadAlternateName()
 
 def ReadTest():
     file = open('scripts/test.csv')
@@ -38,8 +38,6 @@ def ReadPanel():
     Panel.objects.all().delete()
 
     count = 1
-
-
     for record in read_file:
         print(record[1])
         if not record[1]:
