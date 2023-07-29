@@ -1,13 +1,13 @@
 from django.http import JsonResponse
 from app.models.test import Test
-from .serializers import TestSerializer
+from ..serializers import TestSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
 @api_view(['GET'])
 def TestList(request, format=None):
-        
+
     if request.method == 'GET':
         tests = Test.objects.all()
         serializer = TestSerializer(tests, many=True)

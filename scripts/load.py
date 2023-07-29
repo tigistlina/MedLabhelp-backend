@@ -8,9 +8,9 @@ from django.http import JsonResponse
 
 def run():
     # ReadOrgan()
-    ReadPanel()
+    # ReadPanel()
     # ReadTest()
-    #ReadAlternateName()
+    ReadAlternateName()
 
 def ReadTest():
     file = open('scripts/test.csv')
