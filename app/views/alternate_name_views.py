@@ -4,6 +4,7 @@ from ..serializers import AlternateNameSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .views_helper import validate_model
 
 @api_view(['GET'])
 def AlternateNameList(request, format=None):
@@ -16,11 +17,13 @@ def AlternateNameList(request, format=None):
 @api_view(['GET'])
 def AlternateNameDetail(request, id, format=None):
 
-    try:
-        alternatenames = AlternateName.objects.get(pk=id)
-    except AlternateName.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    alternatenames, error_response = validate_model(AlternateName, id)
+
+    if error_response:
+        return error_response
 
     if request.method == 'GET':
         serializer = AlternateNameSerializer(alternatenames)
         return Response(serializer.data)
+
+    return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

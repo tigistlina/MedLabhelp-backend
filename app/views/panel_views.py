@@ -4,6 +4,7 @@ from ..serializers import PanelSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .views_helper import validate_model
 
 @api_view(['GET'])
 def PanelList(request, format=None):
@@ -16,11 +17,13 @@ def PanelList(request, format=None):
 @api_view(['GET'])
 def PanelDetail(request, id, format=None):
 
-    try:
-        panels = Panel.objects.get(pk=id)
-    except Panel.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    panels, error_response = validate_model(Panel, id)
+
+    if error_response:
+        return error_response
 
     if request.method == 'GET':
         serializer = PanelSerializer(panels)
         return Response(serializer.data)
+
+    return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

@@ -4,6 +4,7 @@ from ..serializers import TestSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .views_helper import validate_model
 
 @api_view(['GET'])
 def TestList(request, format=None):
@@ -16,11 +17,13 @@ def TestList(request, format=None):
 @api_view(['GET'])
 def TestDetail(request, id, format=None):
 
-    try:
-        tests = Test.objects.get(pk=id)
-    except Test.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    tests, error_response = validate_model(Test, id)
+
+    if error_response:
+        return error_response
 
     if request.method == 'GET':
         serializer = TestSerializer(tests)
         return Response(serializer.data)
+
+    return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

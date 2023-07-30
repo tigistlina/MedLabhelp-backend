@@ -16,13 +16,13 @@ def OrganList(request, format=None):
 
 @api_view(['GET'])
 def OrganDetail(request, id, format=None):
-    organs = validate_model(Organ, id)
+    organs, error_response = validate_model(Organ, id)
 
-    if not organs:
-        return JsonResponse({'error': f"Organ with id {id} not found"}, status=status.HTTP_404_NOT_FOUND)
+    if error_response:
+        return error_response
 
     if request.method == 'GET':
         serializer = OrganSerializer(organs)
         return Response(serializer.data)
-    else:
-        return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
