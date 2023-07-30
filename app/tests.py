@@ -1,6 +1,7 @@
 from django.test import TestCase
 from app.models.panel import Panel
-
+from app.models.test import AlternateName
+from app.models.test import Test
 
 
 # Create your tests here.
@@ -31,3 +32,10 @@ class URLTests(TestCase):
         panel.save()
         response = self.client.get(f'/panels/{panel.id}')
         self.assertEqual(response.status_code, 200)
+
+    def test_altnamereturns200(self):
+        alt = AlternateName(name='AST')
+        alt.save()
+        response = self.client.get(f'/alternatenames/{alt.id}')
+        self.assertEqual(response.status_code, 200)
+
