@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-73@y#u*=^fz0t@h72nng8+3(ja8)vhcu5muqsh8=gyx2y7zpd9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["medlab-help-api.onrender.com" , "localhost"]
 
 
 # Application definition
@@ -79,10 +80,10 @@ WSGI_APPLICATION = 'medlab_help.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'medlab_api_development',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost'
+        'NAME': os.getenv("DB_NAME", 'medlab_api_development'),
+        'USER': os.getenv("DB_USER", 'postgres'),
+        'PASSWORD': os.getenv("DB_PASSWORD", 'postgres'),
+        'HOST': os.getenv("DB_HOST", 'localhost')
     }
 }
 
