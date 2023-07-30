@@ -7,9 +7,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 
 def run():
-    # ReadOrgan()
-    # ReadPanel()
-    # ReadTest()
+    ReadOrgan()
+    ReadPanel()
+    ReadTest()
     ReadAlternateName()
 
 def ReadTest():
