@@ -7,6 +7,7 @@ class Organ(models.Model):
     @classmethod
     def from_dict(cls, data_dict):
 
+
         return cls(
             name = data_dict["name"],
         )

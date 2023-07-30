@@ -9,6 +9,7 @@ class Test(models.Model):
     info_url = models.TextField()
     normal_reference = models.TextField()
     unit_of_measure = models.TextField()
+    
 
 class AlternateName(models.Model):
     test_id = models.ForeignKey(Test, on_delete=models.CASCADE, null=True)
