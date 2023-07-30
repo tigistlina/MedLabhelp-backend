@@ -16,7 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app.views import test_views, panel_views, organ_views, alternate_name_views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tests/', test_views.TestList),
+    path('tests/<str:id>', test_views.TestDetail),
+
+    path('panels/', panel_views.PanelList),
+    path('panels/<str:id>', panel_views.PanelDetail),
+
+    path('organs/', organ_views.OrganList),
+    path('organs/<str:id>', organ_views.OrganDetail),
+
+    path('alternatenames/', alternate_name_views.AlternateNameList),
+    path('alternatenames/<str:id>', alternate_name_views.AlternateNameDetail),
+
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

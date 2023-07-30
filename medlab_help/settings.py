@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bxroyo1zy_rdz+f_@87-o%sgyq(rpq3y4g6+zy2l+x$6nqw(d*'
+SECRET_KEY = 'django-insecure-73@y#u*=^fz0t@h72nng8+3(ja8)vhcu5muqsh8=gyx2y7zpd9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'app',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +78,11 @@ WSGI_APPLICATION = 'medlab_help.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'medlab_api_development',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost'
     }
 }
 
