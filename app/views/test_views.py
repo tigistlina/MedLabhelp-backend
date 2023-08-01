@@ -27,3 +27,4 @@ def TestDetail(request, id, format=None):
         return Response(serializer.data)
 
     return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+

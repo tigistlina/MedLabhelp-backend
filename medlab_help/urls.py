@@ -30,6 +30,8 @@ urlpatterns = [
     path('organs/', organ_views.OrganList),
     path('organs/<str:id>', organ_views.OrganDetail),
 
+    path('organs/<str:id>/tests', organ_views.TestDetailByOrganId),
+
     path('alternatenames/', alternate_name_views.AlternateNameList),
     path('alternatenames/<str:id>', alternate_name_views.AlternateNameDetail),
 
