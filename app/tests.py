@@ -85,3 +85,8 @@ class URLTests(TestCase):
         non_int_organ_id = '123abc'
         response = self.client.get(f'/organs/{non_int_organ_id}')
         self.assertEqual(response.status_code, 400)
+
+    def test_invalidnamereturns404(self):
+        lab = "vitamin x"
+        response = self.client.get(f'/tests/{lab}')
+        self.assertEqual(response.status_code, 400)
