@@ -15,10 +15,11 @@ class AlternateNameSerializer(serializers.ModelSerializer):
         fields = ['id', 'test_id', 'name']
 
 class PanelSerializer(serializers.ModelSerializer):
+    tests = TestSerializer(many=True, read_only=True)
     class Meta:
         model = Panel
-        fields = ['id', 'name', 'organ_id']
-
+        fields = ['id', 'name', 'organ_id', 'tests']
+        
 class OrganSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organ
