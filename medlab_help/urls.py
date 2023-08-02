@@ -26,6 +26,7 @@ urlpatterns = [
 
     path('panels/', panel_views.PanelList),
     path('panels/<str:id>', panel_views.PanelDetail),
+    path('panels/<str:id>/tests/', panel_views.TestToPanel),
 
     path('organs/', organ_views.OrganList),
     path('organs/<str:id>', organ_views.OrganDetail),

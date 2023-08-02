@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from app.models.panel import Panel
-from ..serializers import PanelSerializer
+from app.models.test import Test
+from ..serializers import PanelSerializer, TestSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -24,6 +25,20 @@ def PanelDetail(request, id, format=None):
 
     if request.method == 'GET':
         serializer = PanelSerializer(panels)
+        return Response(serializer.data)
+
+    return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['GET'])
+def TestToPanel(request, id, format=None):
+    panels, error_response = validate_model(Panel, id)
+
+    if error_response:
+        return error_response
+
+    if request.method == 'GET' :
+        tests = Test.objects.filter(panel_id=panels.id)
+        serializer = TestSerializer(tests, many= True)
         return Response(serializer.data)
 
     return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
