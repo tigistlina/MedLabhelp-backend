@@ -4,15 +4,16 @@ from app.models.panel import Panel
 from app.models.organ import Organ
 
 
-class TestSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Test
-        fields = ['id', 'panel_id', 'name', 'description', 'info_url', 'normal_reference', 'unit_of_measure']
-
 class AlternateNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = AlternateName
-        fields = ['id', 'test_id', 'name']
+        fields = ['name']
+
+class TestSerializer(serializers.ModelSerializer):
+    alternate_name = AlternateNameSerializer(many=True, read_only=True, source='alternatename_set')
+    class Meta:
+        model = Test
+        fields = ['id', 'panel_id', 'name', 'description', 'info_url', 'normal_reference', 'unit_of_measure', 'alternate_name']
 
 class PanelSerializer(serializers.ModelSerializer):
     tests = TestSerializer(many=True, read_only=True)

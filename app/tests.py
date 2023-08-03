@@ -90,3 +90,9 @@ class URLTests(TestCase):
         lab = "vitamin x"
         response = self.client.get(f'/tests/{lab}')
         self.assertEqual(response.status_code, 400)
+
+
+
+
+
+

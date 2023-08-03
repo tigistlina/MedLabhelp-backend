@@ -1,6 +1,7 @@
 from django.http import JsonResponse
-from app.models.test import Test
-from ..serializers import TestSerializer
+from app.models.test import Test, AlternateName
+from app.models.panel import Panel
+from ..serializers import TestSerializer, AlternateNameSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -27,4 +28,25 @@ def TestDetail(request, id, format=None):
         return Response(serializer.data)
 
     return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['GET'])
+def AltNameFromTest(request, id, format=None):
+    test, error_response = validate_model(Test, id)
+
+    if error_response:
+        return error_response
+    
+    if request.method == 'GET':
+        alternate_name = AlternateName.objects.filter(test_id=test.id)
+        serializer = AlternateNameSerializer(alternate_name, many= True)
+        return Response(serializer.data)
+    
+    return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+
+
+
+
+# /tests/test_id/alternatenames
 
