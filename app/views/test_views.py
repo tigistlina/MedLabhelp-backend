@@ -44,9 +44,3 @@ def AltNameFromTest(request, id, format=None):
     return Response({'error': 'Method Not Allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-
-
-
-
-# /tests/test_id/alternatenames
-

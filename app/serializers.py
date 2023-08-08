@@ -7,7 +7,7 @@ from app.models.organ import Organ
 class AlternateNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = AlternateName
-        fields = ['name']
+        fields = ['id' , 'name']
 
 class TestSerializer(serializers.ModelSerializer):
     alternate_name = AlternateNameSerializer(many=True, read_only=True, source='alternatename_set')
