@@ -11,7 +11,7 @@ from .views_helper import validate_model
 def TestList(request, format=None):
 
     if request.method == 'GET':
-        tests = Test.objects.all()
+        tests = Test.objects.all().order_by('name')
         serializer = TestSerializer(tests, many=True)
         return JsonResponse({'tests':serializer.data}, safe=False)
 
@@ -37,7 +37,7 @@ def AltNameFromTest(request, id, format=None):
         return error_response
     
     if request.method == 'GET':
-        alternate_name = AlternateName.objects.filter(test_id=test.id)
+        alternate_name = AlternateName.objects.filter(test_id=test.id).order_by('name')
         serializer = AlternateNameSerializer(alternate_name, many= True)
         return Response(serializer.data)
     

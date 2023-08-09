@@ -10,7 +10,7 @@ from .views_helper import validate_model
 def AlternateNameList(request, format=None):
 
     if request.method == 'GET':
-        alternatenames = AlternateName.objects.all()
+        alternatenames = AlternateName.objects.all().order_by('name')
         serializer = AlternateNameSerializer(alternatenames, many=True)
         return JsonResponse({'alternatenames':serializer.data}, safe=False)
 

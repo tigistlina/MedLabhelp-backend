@@ -11,7 +11,7 @@ from .views_helper import validate_model
 def PanelList(request, format=None):
 
     if request.method == 'GET':
-        panels = Panel.objects.all()
+        panels = Panel.objects.all().order_by('name')
         serializer = PanelSerializer(panels, many=True)
         return JsonResponse({'panels':serializer.data}, safe=False)
 
@@ -37,7 +37,7 @@ def TestToPanel(request, id, format=None):
         return error_response
 
     if request.method == 'GET' :
-        tests = Test.objects.filter(panel_id=panels.id)
+        tests = Test.objects.filter(panel_id=panels.id).order_by('name')
         serializer = TestSerializer(tests, many= True)
         return Response(serializer.data)
 

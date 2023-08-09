@@ -12,7 +12,7 @@ from .views_helper import validate_model
 def OrganList(request, format=None):
 
     if request.method == 'GET':
-        organs = Organ.objects.all()
+        organs = Organ.objects.all().order_by('name')
         serializer = OrganSerializer(organs, many=True)
         return JsonResponse({'organs':serializer.data}, safe=False)
 
@@ -40,10 +40,10 @@ def TestDetailByOrganId(request, id, format=None):
         # then query for all test associated with those panel ids
         # we can serialize those tests and return the test
     if request.method == 'GET':
-        panels = Panel.objects.filter(organ_id=id)
+        panels = Panel.objects.filter(organ_id=id).order_by('name')
         panel_ids = [panel.id for panel in panels]
 
-        tests = Test.objects.filter(panel_id__in=panel_ids)
+        tests = Test.objects.filter(panel_id__in=panel_ids).order_by('name')
         serializer = TestSerializer(tests, many=True)
         return Response(serializer.data)
 
